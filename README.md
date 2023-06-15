@@ -2,6 +2,8 @@
 
 This project is a car rental website application developed using the MERN (MongoDB, Express.js, React, Node.js) stack. Users can search for cars, make reservations, and complete payments.
 
+The server part is currently under development. Later, the client part will be developed.
+
 ## Project Structure
 
 The project consists of two main parts: the client and the server.
