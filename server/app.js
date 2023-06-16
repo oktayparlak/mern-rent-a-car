@@ -1,10 +1,13 @@
-const express = require('express');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const userRoutes = require('./routes/user');
-const vehicleRoutes = require('./routes/vehicle');
-const bookingRoutes = require('./routes/booking');
-const paymentRoutes = require('./routes/payment.js');
+import userRoutes from './routes/users';
+import vehicleRoutes from './routes/vehicles';
+import bookingRoutes from './routes/bookings';
+import paymentRoutes from './routes/payments';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -18,6 +21,18 @@ app.use('/api/vehicle', vehicleRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}.`);
-});
+/** Mongoose Setup */
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB.');
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}.`);
+    });
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
