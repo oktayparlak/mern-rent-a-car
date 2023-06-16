@@ -2,10 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-import userRoutes from './routes/users';
-import vehicleRoutes from './routes/vehicles';
-import bookingRoutes from './routes/bookings';
-import paymentRoutes from './routes/payments';
+import userRoutes from './routes/users.js';
+import vehicleRoutes from './routes/vehicles.js';
+import bookingRoutes from './routes/bookings.js';
+import paymentRoutes from './routes/payments.js';
 
 dotenv.config();
 const app = express();
@@ -16,6 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /** Routes */
+app.get('/', (req, res) => {
+  res.send('Welcome to the Car Rental API.');
+});
 app.use('/api/user', userRoutes);
 app.use('/api/vehicle', vehicleRoutes);
 app.use('/api/bookings', bookingRoutes);
