@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/api/vehicles', getVehicles);
 /** Get Vehicle By Id */
 router.get('/api/vehicles/:vehicleId', getVehicleById);
-/** Get Vehicle Bookings */
+/** Get Vehicle's Bookings */
 router.get('/api/vehicles/:vehicleId/bookings', getVehicleBookings);
 
 /** Post Vehicle */

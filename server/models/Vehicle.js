@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 
 const vehicleSchema = mongoose.Schema(
     {
+        title: {
+            type: String,
+            required: true,
+            min: 6,
+            max: 40,
+        },
         brand: {
             type: String,
             required: true,
@@ -40,4 +46,5 @@ const vehicleSchema = mongoose.Schema(
 );
 
 const Vehicle = mongoose.model('Vehicle', vehicleSchema);
+
 export default Vehicle;
