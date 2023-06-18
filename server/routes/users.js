@@ -1,25 +1,24 @@
 import express from 'express';
 
-import { getUserById, postRegisterUser, postLoginUser, postResetPassword, putUserProfile, putBlockUser, deleteUser} from '../controllers/users.js';
+import { verifyToken } from '../middlewares/auth.js';
+import { getUserById, registerUser, loginUser, resetPassword, updateUserProfile, deleteUser } from '../controllers/users.js';
 
 const router = express.Router();
 
 /** Get User By Id */
-router.get('/:userId', getUserById);
+router.get('/:userId',verifyToken, getUserById);
 
 /** Post Register */
-router.post('/register', postRegisterUser);
+router.post('/register', registerUser);
 /** Post Login */
-router.post('/login', postLoginUser);
+router.post('/login', loginUser);
 /** Post Reset Password */
-router.post('/reset-password', postResetPassword);
+//router.post('/reset-password', resetPassword);
 
 /** Put User Profile */
-router.put('/:userId', putUserProfile);
-/** Put Block User */
-router.put('/:userId/block', putBlockUser);
+router.put('/:userId', updateUserProfile);
 
 /** Delete User */
-router.delete('/:userId', deleteUser);
+//router.delete('/:userId', deleteUser);
 
 export default router;

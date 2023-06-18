@@ -1,13 +1,22 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import User from '../models/user.js';
+import User from '../models/User.js';
 
 /** Get User By Id */
-export const getUserById = (req, res) => {};
+export const getUserById = (req, res) => {
+  const  { userId }  = req.params;
+  User.findById(userId)
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
+    });
+};
 
 /** Register User */
-export const postRegisterUser = (req, res) => {
+export const registerUser = (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   bcrypt.hash(password, 12).then((hashedPassword) => {
     const newUser = new User({ firstName, lastName, email, password: hashedPassword });
@@ -23,7 +32,7 @@ export const postRegisterUser = (req, res) => {
 };
 
 /** Login User */
-export const postLoginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
@@ -35,7 +44,6 @@ export const postLoginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
-    delete user.password;
     res.status(200).json({ user, token });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -43,13 +51,24 @@ export const postLoginUser = async (req, res) => {
 };
 
 /** Reset Password */
-export const postResetPassword = async (req, res) => {};
+export const resetPassword = async (req, res) => {};
 
 /** Update User Profile */
-export const putUserProfile = (req, res) => {};
+export const updateUserProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstName, lastName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 12);
+    User.findByIdAndUpdate(id, { firstName, lastName, email, password: hashedPassword }).then((user) => {
+      res.status(200).json(user);
+    });
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+  
+};
 
-/** Block User */
-export const putBlockUser = (req, res) => {};
 
 /** Delete User */
 export const deleteUser = (req, res) => {};

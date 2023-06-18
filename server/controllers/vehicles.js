@@ -1,4 +1,4 @@
-import Vehicle from '../models/vehicle.js';
+import Vehicle from '../models/Vehicle.js';
 
 /** Get Vehicles */
 export const getVehicles = async (req, res) => {
@@ -24,7 +24,7 @@ export const getVehicleById = async (req, res) => {
 export const getVehicleBookings = async (req, res) => {};
 
 /** Post Vehicle */
-export const postVehicle = (req, res) => {
+export const createVehicle = (req, res) => {
     try {
         const { title, brand, model, year, description, price, image } = req.body;
         const vehicle = new Vehicle({ title, brand, model, year, description, price, image, createdBy: req.userId });
@@ -37,7 +37,7 @@ export const postVehicle = (req, res) => {
 };
 
 /** Put Vehicle */
-export const putVehicle = async (req, res) => {};
+export const updateVehicle = async (req, res) => {};
 
 /** Delete Vehicle */
 export const deleteVehicle = async (req, res) => {};

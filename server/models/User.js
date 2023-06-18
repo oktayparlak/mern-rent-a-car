@@ -27,6 +27,12 @@ const userSchema = mongoose.Schema(
         resetToken: {
             type: String,
         },
+        vehicles: [
+            {
+                vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' },
+                default: [],
+            },
+        ],
     },
     { timestamps: true }
 );

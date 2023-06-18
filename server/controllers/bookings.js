@@ -1,4 +1,4 @@
-import Booking from '../models/booking.js';
+import Booking from '../models/Booking.js';
 
 /** Get User's Booking By User Id */
 export const getUserBookingByUserId = async (req, res) => {
@@ -25,7 +25,7 @@ export const getBookingById = async (req, res) => {
 };
 
 /** Post Booking */
-export const postBooking = async (req, res) => {
+export const createBooking = async (req, res) => {
   try {
     const { userId, vehicleId, startDate, endDate, totalPrices } = req.body;
     const booking = await Booking.findOne({ vehicleId });

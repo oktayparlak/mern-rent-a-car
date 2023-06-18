@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getVehicles, getVehicleById, getVehicleBookings, postVehicle, putVehicle, deleteVehicle } from '../controllers/vehicles.js';
+import { getVehicles, getVehicleById, getVehicleBookings, createVehicle, updateVehicle, deleteVehicle } from '../controllers/vehicles.js';
 
 const router = express.Router();
 
@@ -12,10 +12,10 @@ router.get('/api/vehicles/:vehicleId', getVehicleById);
 router.get('/api/vehicles/:vehicleId/bookings', getVehicleBookings);
 
 /** Post Vehicle */
-router.post('/api/vehicles', postVehicle);
+router.post('/api/vehicles', createVehicle);
 
 /** Put Vehicle */
-router.put('/api/vehicles/:vehicleId', putVehicle);
+router.put('/api/vehicles/:vehicleId', updateVehicle);
 
 /** Delete Vehicle */
 router.delete('/api/vehicles/:vehicleId', deleteVehicle);
